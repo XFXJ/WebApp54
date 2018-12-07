@@ -1,0 +1,22 @@
+﻿@using WebApplication.Models;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MyView</title>
+</head>
+<body>
+    <div> 
+        @{ Employee emp = (Employee)ViewData["Employee"];}
+  <h1>@emp.Name,@((string)ViewData["greeting"])!</h1><br />
+        <b>员工信息</b><br />
+        姓名：@emp.Name<br />
+        工资：@emp.Salary.ToString("c")
+    </div>
+</body>
+</html>
