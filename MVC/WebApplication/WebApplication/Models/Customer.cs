@@ -12,7 +12,7 @@ namespace WebApplication.Models
             get;
             set;
         }
-        public int Address
+        public string Address
         {
             get;
             set;

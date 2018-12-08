@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication.Models;
+using WebApplication.ViewModels;
 
 namespace WebApplication.Controllers
 {
@@ -38,9 +39,23 @@ namespace WebApplication.Controllers
             Employee emp = new Employee();
             emp.Name = "刘帅";
             emp.Salary = 2000;
+
+            EmployeeViewModel vmEmp = new EmployeeViewModel();
+            vmEmp.EmployeeName = emp.Name;
+            vmEmp.Salary = emp.Salary.ToString("c");
+            if(emp.Salary>1000)
+            {
+                vmEmp.SalaryGrade = "老板";
+            }
+            else
+            {
+                vmEmp.SalaryGrade = "搬砖";
+            }
             //ViewData["Employee"] = emp;
-            ViewBag.Employee = emp;
-            return View("MyView",emp);
+            //ViewBag.Employee = emp;
+            vmEmp.UserName = "管理员";
+            vmEmp.Greeting = "早上好";
+            return View("MyView",vmEmp);
         }
     }
 

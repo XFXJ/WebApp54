@@ -1,5 +1,5 @@
 ﻿@using WebApplication.Models;
-@model  Customer
+@*@model  Employee*@
 @{
     Layout = null;
 }
@@ -13,24 +13,28 @@
 </head>
 <body>
     <div> 
-        @{ 
-        Customer cus = ViewBag.Customer;
-        }
-        <h1>@Model.CustomerName,@ViewBag.greeting</h1><hr />
-        <h2>员工信息</h2>
-        <p>姓名：@Model.CustomerName</p>
-        <p>工资：@Model.Address.ToString("c")</p>
+        @{ Employee emp = (Employee)ViewData["Employee"];
+            Customer cus = (Customer)ViewData["Customer"];
+            }
+            <h1>@ViewBag.greeting</h1><hr />
+            <h2>员工信息</h2>
+            <p>姓名：@emp.Name</p>
+            <p>工资：@emp.Salary.ToString("c")</p>
 
-        @{
-            if (Model.Address > 1000)
-            {
-                <p>级别：老板</p>
+            @{
+                if (emp.Salary > 1000)
+                {
+                    <p>级别：上层</p>
+                }
+                else
+                {
+                    <p>级别：下层</p>
+                }
             }
-            else
-            {
-                <p>级别：搬砖</p>
-            }
-        }
-    </div>
-</body>
-</html>
+        <hr />
+            <h2>客户信息</h2>
+            <p>姓名：@cus.CustomerName</p>
+            <p>国家：@cus.Address</p>
+        </div>
+    </body>
+    </html>
