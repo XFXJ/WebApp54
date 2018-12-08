@@ -17,7 +17,7 @@ namespace WebApplication.Controllers
         {
             Customer c = new Customer();
             c.CustomerName = "刘帅";
-            c.Address = "柳州职业技术学院";
+            //c.Address = "柳州职业技术学院";
             return c;
         }
         public ActionResult GetView()
@@ -33,12 +33,14 @@ namespace WebApplication.Controllers
             {
                 greeting = "中午好";
             }
-            ViewData["greeting"] = greeting;
+            //ViewData["greeting"] = greeting;
+            ViewBag.greeting = greeting;
             Employee emp = new Employee();
             emp.Name = "刘帅";
             emp.Salary = 2000;
-            ViewData["Employee"] = emp;
-            return View("MyView");
+            //ViewData["Employee"] = emp;
+            ViewBag.Employee = emp;
+            return View("MyView",emp);
         }
     }
 

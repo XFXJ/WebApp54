@@ -1,0 +1,36 @@
+﻿@using WebApplication.Models;
+@model  Customer
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Gettest</title>
+</head>
+<body>
+    <div> 
+        @{ 
+        Customer cus = ViewBag.Customer;
+        }
+        <h1>@Model.CustomerName,@ViewBag.greeting</h1><hr />
+        <h2>员工信息</h2>
+        <p>姓名：@Model.CustomerName</p>
+        <p>工资：@Model.Address.ToString("c")</p>
+
+        @{
+            if (Model.Address > 1000)
+            {
+                <p>级别：老板</p>
+            }
+            else
+            {
+                <p>级别：搬砖</p>
+            }
+        }
+    </div>
+</body>
+</html>
