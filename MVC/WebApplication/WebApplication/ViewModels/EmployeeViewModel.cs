@@ -22,15 +22,5 @@ namespace WebApplication.ViewModels
             get;
             set;
         }
-        public string UserName
-        {
-            get;
-            set;
-        }
-        public string Greeting
-        {
-            get;
-            set;
-        }
     }
 }

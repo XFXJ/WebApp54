@@ -53,8 +53,8 @@ namespace WebApplication.Controllers
             }
             //ViewData["Employee"] = emp;
             //ViewBag.Employee = emp;
-            vmEmp.UserName = "管理员";
-            vmEmp.Greeting = "早上好";
+            //vmEmp.UserName = "管理员";
+            //vmEmp.Greeting = "早上好";
             return View("MyView",vmEmp);
         }
     }
