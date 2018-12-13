@@ -15,45 +15,69 @@ namespace WebApplication.Controllers
         public ActionResult Index()
         {
             EmployeeListViewModel empListModel = new EmployeeListViewModel();
+            //获取将处理过的数据列表
+            empListModel.Employees = getEmpVmList();
+            //获取问候语
+            empListModel.Greeting = getGreeting();
+            //获取用户名
+            empListModel.UserName = getUserName();
+            //将数据送往视图
+            return View(empListModel);
+
+        }
+
+        [NonAction]
+        List<EmployeeViewModel> getEmpVmList()
+        {
             //实例化员工信息业务层
             EmployeeBusinessLayer empBL = new EmployeeBusinessLayer();
-            //员工
+            //员工原始数据列表，获取来自业务层类的数据
             var listEmp = empBL.GetEmpoleesList();
-
+            //员工原始数据加工后的视图数据列表，当前状态是空的
             var listEmpVm = new List<EmployeeViewModel>();
-            foreach(var item in listEmp)
+
+            //通过循环遍历员工原始数据数组，将数据一个一个的转换，并加入listEmpVm
+            foreach (var item in listEmp)
             {
                 EmployeeViewModel empVmObj = new EmployeeViewModel();
                 empVmObj.EmployeeName = item.Name;
-                empVmObj.Salary = item.Salary.ToString("c");
-                if(item.Salary>10000)
+                empVmObj.Salary = item.Salary.ToString("C");
+                if (item.Salary > 10000)
                 {
                     empVmObj.SalaryGrade = "土豪";
                 }
                 else
                 {
-                    empVmObj.SalaryGrade = "屌丝";
+                    empVmObj.SalaryGrade = "14";
                 }
+
                 listEmpVm.Add(empVmObj);
             }
-
-            empListModel.Employees = listEmpVm;
-
+            return listEmpVm;
+        }
+        [NonAction]
+        string getGreeting()
+        {
             string greeting;
+            //获取当前时间
             DateTime dt = DateTime.Now;
-            int h = dt.Hour;
-            if (h < 12)
+            //获取当前小时数
+            int hour = dt.Hour;
+            //根据小时数判断需要返回哪个视图，
+            if (hour < 12)
             {
                 greeting = "早上好";
             }
             else
             {
-                greeting = "中午好";
+                greeting = "下午好";
             }
-            
-            empListModel.UserName = "管理员";
-            empListModel.Greeting = greeting;
-            return View(empListModel);
+            return greeting;
+        }
+        string getUserName()
+        {
+            return "Admin";
         }
     }
+
 }
