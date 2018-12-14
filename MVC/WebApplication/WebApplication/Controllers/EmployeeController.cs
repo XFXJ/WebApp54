@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication.Models;
 using WebApplication.ViewModels;
+using WebApplication.DataAccessLayer;
 
 
 namespace WebApplication.Controllers
@@ -32,7 +33,7 @@ namespace WebApplication.Controllers
             //实例化员工信息业务层
             EmployeeBusinessLayer empBL = new EmployeeBusinessLayer();
             //员工原始数据列表，获取来自业务层类的数据
-            var listEmp = empBL.GetEmpoleesList();
+            var listEmp = empBL.GetEmployees();
             //员工原始数据加工后的视图数据列表，当前状态是空的
             var listEmpVm = new List<EmployeeViewModel>();
 
@@ -48,7 +49,7 @@ namespace WebApplication.Controllers
                 }
                 else
                 {
-                    empVmObj.SalaryGrade = "14";
+                    empVmObj.SalaryGrade = "屌丝";
                 }
 
                 listEmpVm.Add(empVmObj);
@@ -77,6 +78,19 @@ namespace WebApplication.Controllers
         string getUserName()
         {
             return "Admin";
+        }
+
+        public ActionResult AddNew()
+        {
+            return View("CreateEmployee");
+        }
+        //public ActionResult SaveEmployee(Employee e)
+        //{
+        //    SalesERPOLDAL salesDal = new SalesERPOLDAL();
+        //}
+        public string SaveEmployee(Employee e)
+        {
+            return "姓名：" + e.Name + "工资：" + e.Salary;
         }
     }
 
