@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="BlogBusinessLayer\BlogBusinessLayera.cs" />
     <Compile Include="DataAccessLayer\BloggingContext.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Program.cs" />

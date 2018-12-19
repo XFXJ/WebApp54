@@ -12,7 +12,7 @@ namespace CodeFirstNewDatabaseSample
     {
         static void Main(string[] args)
         {
-            //createBlog();
+            createBlog();
             QueryBlog();
             Update();
             QueryBlog();
