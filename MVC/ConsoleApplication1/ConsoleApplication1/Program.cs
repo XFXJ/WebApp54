@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsoleApplication1.Models;
 using ConsoleApplication1.BussinessLayer;
+using ConsoleApplication1.DataAccessLayer;
 
 namespace ConsoleApplication1
 {
@@ -47,9 +48,18 @@ namespace ConsoleApplication1
         static void DisplatPosts(int blogId) {
             Console.WriteLine(blogId+"的帖子列表");
             //根据博客id获取博客
-
-            //根据博客导航属性，获取所有该博客的帖子
+            List<Post> list = null;
+            using (var db = new BloggingContext())
+            {
+                //根据博客导航属性，获取所有该博客的帖子
+                Blog blog = db.Blogs.Find(blogId);
+                list = blog.Posts;
+            }
             //遍历所有帖子，显示帖子标题（博客号-帖子标题）
+            foreach (var item in list)
+            {
+                Console.WriteLine(item.Blog.BlogId + "--" + item.Title);
+            }
         }
 
 

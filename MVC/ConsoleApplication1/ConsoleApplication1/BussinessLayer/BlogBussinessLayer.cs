@@ -16,7 +16,7 @@ namespace ConsoleApplication1.BussinessLayer
             using (var db = new BloggingContext())
             {
                 db.Blogs.Add(blog);
-               // db.Entry(Blog).State = EntityState.Added;
+                //db.Entry(Blog).State = EntityState.Added;
                 db.SaveChanges();
             }
         }
