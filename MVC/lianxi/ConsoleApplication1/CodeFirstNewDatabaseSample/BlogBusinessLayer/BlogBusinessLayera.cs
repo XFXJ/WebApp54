@@ -61,7 +61,30 @@ namespace CodeFirstNewDatabaseSample.BlogBusinessLayer
                 db.SaveChanges();
             }
         }
-
+        //查询博客名称
+        public List<Blog> QueryBlog(string name)
+        {
+            using (var db = new BloggingContext())
+            {
+                // 查询所有包含字符串name的博客
+                var blogs = from b in db.Blogs
+                            where b.Name.Contains(name)
+                            select b;
+                return blogs.ToList();
+            }
+        }
+        //查询帖子
+        public List<Post> QueryPosts(string Title)
+        {
+            using (var db = new BloggingContext())
+            {
+                // 查询所有包含字符串Title的帖子
+                var post = from b in db.Posts
+                            where b.Title.Contains(Title)
+                            select b;
+                return post.ToList();
+            }
+        }
         public List<Blog>Query()
         {
             using (var db = new BloggingContext())

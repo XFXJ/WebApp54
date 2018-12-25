@@ -19,7 +19,9 @@ namespace CodeFirstNewDatabaseSample
             //Update();
             //QueryBlog();
             //Delete();
-            AddPost();
+            //ListBolg();
+            ListPost();
+            //AddPost();
             Console.WriteLine("随便退出");
             Console.ReadKey();
         }
@@ -76,10 +78,8 @@ namespace CodeFirstNewDatabaseSample
             }
             else if (i == 5)
             {
-                //int blogId = GetBlogId();
-                ////显示指定博客的帖子列表
-                //DisplayPosts(blogId);
-                Console.WriteLine("1:退出--   --2:新增博客--   --3:更改博客--  --4:删除博客--  --5:操作帖子--");
+              
+                Console.WriteLine("1:退出--   --2:新增帖子--   --3:更改帖子--  --4:删除帖子--  --5:返回上一层--");
                 Console.WriteLine("请输入操作指令");
                 int s = int.Parse(Console.ReadLine());
                 if (s == 1)
@@ -89,30 +89,24 @@ namespace CodeFirstNewDatabaseSample
 
                 else if (s == 2)
                 {
-                   
-                    QueryBlog();
-                    Console.Clear();
-                    BlogGather();
-                }
-                else if (s == 3)
-                {
-                    Update();
-                    QueryBlog();
-                    Console.Clear();
-                    BlogGather();
-                }
-                else if (s == 4)
-                {
-                    Delete();
-                    QueryBlog();
-                    Console.Clear();
-                    BlogGather();
-                }
-                else if (s == 5)
-                {
                     int blogId = GetBlogId();
                     //显示指定博客的帖子列表
                     DisplayPosts(blogId);
+                    PostById(blogId);
+                   
+                }
+                else if (s == 3)
+                {
+                   
+                    UpdatePosts();
+                }
+                else if (s == 4)
+                {
+                    DeletePosts();
+                }
+                else if (s == 5)
+                {
+                    QueryBlog();
                 }
             }
             else
@@ -201,7 +195,32 @@ namespace CodeFirstNewDatabaseSample
             DisplayPosts(blogId);
 
         }
-            static void createBlog()
+        ////查询博客名称
+        static void ListBolg()
+        {
+            Console.WriteLine("请输入要查找的博客名字");
+            string name = Console.ReadLine();
+            BlogBusinessLayera bbl = new BlogBusinessLayera();
+            var query = bbl.QueryBlog(name);
+            foreach(var item in query)
+            {
+                Console.WriteLine(item.BlogId + item.Name);
+            }
+        }
+        //查询帖子
+        static void ListPost()
+        {
+            Console.WriteLine("请输入要查找的帖子名字");
+            string title = Console.ReadLine();
+            BlogBusinessLayera bbl = new BlogBusinessLayera();
+            var query = bbl.QueryPosts(title);
+            foreach (var item in query)
+            {
+                Console.WriteLine(item.Title + item.Content);
+            }
+        }
+
+        static void createBlog()
         {
             Console.WriteLine("输入博客名称");
             string name = Console.ReadLine();
