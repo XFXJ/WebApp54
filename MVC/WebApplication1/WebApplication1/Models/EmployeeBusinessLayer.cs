@@ -12,7 +12,7 @@ namespace WebApplication1.Models
         public List<Employee> GetEmployeeList()
         {
             SalesERPDAL dal = new SalesERPDAL();
-            var list = dal.Employees.ToList();
+            var list = dal.Employee.ToList();
             return list;
         }
     }

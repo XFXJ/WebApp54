@@ -22,7 +22,7 @@
         //的详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=390109。
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Employee> Employee { get; set; }
     }
 
     //public class MyEntity
