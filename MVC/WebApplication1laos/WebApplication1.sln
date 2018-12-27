@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{B962CE9A-141F-4F31-A9EC-0EF79AD470C3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AEB0A725-114B-45B9-86E4-2E062E22DE6D} = {AEB0A725-114B-45B9-86E4-2E062E22DE6D}
+		{3319B685-52BF-40E7-990C-8A3B0877FF09} = {3319B685-52BF-40E7-990C-8A3B0877FF09}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{3319B685-52BF-40E7-990C-8A3B0877FF09}"
 EndProject

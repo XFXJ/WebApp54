@@ -18,7 +18,7 @@
         <ul>
             @foreach (var item in Model.EmployeeViewList)
             {
-                <li>@item.EmployeeName,@item.EmployeeSalary,@item.EmployeeGrade<a href="/employee/delete@item.EmployeeId">删除</a></li>
+                <li>@item.EmployeeName,@item.EmployeeSalary,@item.EmployeeGrade<a href="/employee/delete/@item.EmployeeId">删除</a>  <a href="/employee/Edit/@item.EmployeeId">更新</a></li>
             }
         </ul>
     </div>

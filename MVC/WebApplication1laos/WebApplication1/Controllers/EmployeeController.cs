@@ -51,6 +51,20 @@ namespace WebApplication1.Controllers
             emp.Delete(id);
             return RedirectToAction("index");
         }
+        //更新
+        public ActionResult Edit(int id)
+        {
+            EmployeeBusinessLayer ebl = new EmployeeBusinessLayer();
+            Employee emp = ebl.Query(id);
+            return View(emp);
+        }
+        [HttpPost]
+        public ActionResult Edit(Employee emp)
+        {
+            EmployeeBusinessLayer ebl = new EmployeeBusinessLayer();
+            ebl.Update(emp);
+            return RedirectToAction("index");
+        }
         [NonAction]
         List<EmployeeViewModel> getEmpVmList()
         {
