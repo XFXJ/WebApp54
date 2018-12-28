@@ -46,6 +46,13 @@ namespace WebApplication1.Models
                 return emp;
             }
         }
+        public IEnumerable<Employee>Search(string searchStirng)
+        {
+            using (var db = new SalesERPDAL())
+            {
+              return  db.Employees.Where(e => e.Name.Contains(searchStirng)).ToList();
+            }
+        }
         //更新方法
         public void Update(Employee emp)
         {

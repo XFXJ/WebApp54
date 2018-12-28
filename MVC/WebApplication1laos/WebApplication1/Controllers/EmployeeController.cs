@@ -15,8 +15,13 @@ namespace WebApplication1.Controllers
         public ActionResult Index()
         {
             EmployeeListViewModel empListModel = new EmployeeListViewModel();
+           
+            ////实例化员工信息业务层
+            EmployeeBusinessLayer empBL = new EmployeeBusinessLayer();
+            ////员工原始数据列表，获取来自业务层类的数据
+            var listEmp = empBL.GetEmployeeList();
             //获取将处理过的数据列表
-            empListModel.EmployeeViewList =getEmpVmList();
+            empListModel.EmployeeViewList = getEmpVmList(listEmp);
             // 获取问候语
             empListModel.Greeting = getGreeting();
             //获取用户名
@@ -51,14 +56,30 @@ namespace WebApplication1.Controllers
             emp.Delete(id);
             return RedirectToAction("index");
         }
-        //更新
+        //查询
         public ActionResult Edit(int id)
         {
             EmployeeBusinessLayer ebl = new EmployeeBusinessLayer();
             Employee emp = ebl.Query(id);
             return View(emp);
         }
+        public ActionResult Search(string searchString)
+        {
+            EmployeeBusinessLayer emp = new EmployeeBusinessLayer();
+            var queryResult = emp.Search(searchString);
+          
+
+            EmployeeListViewModel empListModel = new EmployeeListViewModel();
+            //获取将处理过的数据列表
+            empListModel.EmployeeViewList = getEmpVmList(queryResult.ToList());
+            //获取问候语
+            empListModel.Greeting = getGreeting();
+            //获取用户名
+            empListModel.UserName = getUserName();
+            return View("index", empListModel);
+        }
         [HttpPost]
+        //更新
         public ActionResult Edit(Employee emp)
         {
             EmployeeBusinessLayer ebl = new EmployeeBusinessLayer();
@@ -66,12 +87,12 @@ namespace WebApplication1.Controllers
             return RedirectToAction("index");
         }
         [NonAction]
-        List<EmployeeViewModel> getEmpVmList()
+        List<EmployeeViewModel> getEmpVmList(List<Employee> listEmp)
         {
-            //实例化员工信息业务层
-            EmployeeBusinessLayer empBL = new EmployeeBusinessLayer();
-            //员工原始数据列表，获取来自业务层类的数据
-            var listEmp = empBL.GetEmployeeList();
+            ////实例化员工信息业务层
+            //EmployeeBusinessLayer empBL = new EmployeeBusinessLayer();
+            ////员工原始数据列表，获取来自业务层类的数据
+            //var listEmp = empBL.GetEmployeeList();
             //员工原始数据加工后的视图数据列表，当前状态是空的
             var listEmpVm = new List<EmployeeViewModel>();
 
