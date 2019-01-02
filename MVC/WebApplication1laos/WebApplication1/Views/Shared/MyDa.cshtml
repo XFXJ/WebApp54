@@ -1,0 +1,20 @@
+﻿
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MyDa</title>
+</head>
+<body>
+    <div> 
+
+        @Html.ActionLink("主页", "Index", "Employee")
+       <hr />
+         @RenderBody()
+        <hr />
+        <p>&copy; @DateTime.Now.Year - 尾部</p>
+    </div>
+</body>
+</html>

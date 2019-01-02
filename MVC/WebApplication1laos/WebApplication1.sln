@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication2", "WebApplication2\WebApplication2.csproj", "{AEB0A725-114B-45B9-86E4-2E062E22DE6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMovie", "MvcMovie\MvcMovie.csproj", "{C8A81FE2-15A2-4E7E-9E12-2EABCE2FEBF6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,10 +31,6 @@ Global
 		{AEB0A725-114B-45B9-86E4-2E062E22DE6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEB0A725-114B-45B9-86E4-2E062E22DE6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEB0A725-114B-45B9-86E4-2E062E22DE6D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C8A81FE2-15A2-4E7E-9E12-2EABCE2FEBF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8A81FE2-15A2-4E7E-9E12-2EABCE2FEBF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8A81FE2-15A2-4E7E-9E12-2EABCE2FEBF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8A81FE2-15A2-4E7E-9E12-2EABCE2FEBF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
