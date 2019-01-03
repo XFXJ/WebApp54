@@ -13,7 +13,12 @@
 <body>
     <form action="/employee/search" method="post"> 
     <input type="text" name="searchString" value=""> 
-    <input type="submit" name="搜索">
+    <input type="submit" value="搜索">
+        @*<p>
+            Genre: @Html.DropDownList("movieGenre", "全部")
+            Title: @Html.TextBox("SearchString")
+            <input type="submit" value="Filter" />
+        </p>*@
     </form>
     <h2>@Model.UserName,@Model.Greeting</h2>
     <p> @Html.ActionLink("新增", "addnew")
@@ -26,7 +31,7 @@
                 <li>@item.EmployeeName,@item.EmployeeSalary,@item.EmployeeGrade@*<a href="/employee/delete/@item.EmployeeId">删除</a>  <a href="/employee/Edit/@item.EmployeeId">更新</a>*@
 
                     @Html.ActionLink("更新", "Edit", new { id = item.EmployeeId }) |
-                    @Html.ActionLink("删除", "Details", new { id = item.EmployeeId }) |
+                    @Html.ActionLink("删除", "delete", new { id = item.EmployeeId }) |
              </li>
             }
         </ul>

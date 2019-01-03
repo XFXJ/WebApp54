@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication2", "WebApplication2\WebApplication2.csproj", "{AEB0A725-114B-45B9-86E4-2E062E22DE6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContosoUniversity", "ContosoUniversity\ContosoUniversity.csproj", "{A98F43F0-F4C3-4DF2-B285-46607E321B13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{AEB0A725-114B-45B9-86E4-2E062E22DE6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEB0A725-114B-45B9-86E4-2E062E22DE6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEB0A725-114B-45B9-86E4-2E062E22DE6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A98F43F0-F4C3-4DF2-B285-46607E321B13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A98F43F0-F4C3-4DF2-B285-46607E321B13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A98F43F0-F4C3-4DF2-B285-46607E321B13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A98F43F0-F4C3-4DF2-B285-46607E321B13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
