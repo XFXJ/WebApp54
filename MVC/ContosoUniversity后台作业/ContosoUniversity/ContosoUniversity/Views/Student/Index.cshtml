@@ -1,0 +1,49 @@
+﻿@model PagedList.IPagedList<ContosoUniversity.Models.Student>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>主页</h2>
+
+<p>
+    @Html.ActionLink("新增", "Create")
+</p>
+@using (Html.BeginForm("Index", "Student", FormMethod.Get))
+{
+    <p>
+        输入关键字:@Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="搜索" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("姓名", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("注册日期", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnrollmentDate)
+        </td>
+        <td>
+            @Html.ActionLink("更新", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("查看", "Details", new { id = item.ID }) |
+            @Html.ActionLink("删除", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
