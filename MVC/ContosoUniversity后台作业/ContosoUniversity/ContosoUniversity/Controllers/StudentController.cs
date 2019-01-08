@@ -86,7 +86,7 @@ namespace ContosoUniversity.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LastName,FirstMidName,EnrollmentDate")] Student student)
+        public ActionResult Create([Bind(Include = "ID,Name,EnrollmentDate,Image")] Student student)
         {
             if (ModelState.IsValid)
             {
