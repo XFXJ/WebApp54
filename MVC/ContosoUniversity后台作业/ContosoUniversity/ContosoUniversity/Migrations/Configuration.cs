@@ -19,14 +19,22 @@ namespace ContosoUniversity.Migrations
         {
             var students = new List<Student>
             {
-                new Student { Name = "Alexander",EnrollmentDate = DateTime.Parse("2010-09-01") },
-                new Student {Name = "Alonso",EnrollmentDate = DateTime.Parse("2012-09-01") },
-                new Student {Name = "Anand", EnrollmentDate = DateTime.Parse("2013-09-01") },
-                new Student {Name = "Barzdukas",EnrollmentDate = DateTime.Parse("2012-09-01") },
-                new Student { Name = "Li", EnrollmentDate = DateTime.Parse("2012-09-01") },
-                new Student { Name = "Justice",EnrollmentDate = DateTime.Parse("2011-09-01") },
-                new Student {Name = "Norman",EnrollmentDate = DateTime.Parse("2013-09-01") },
-                new Student {Name = "Olivetto",EnrollmentDate = DateTime.Parse("2005-09-01") }
+                new Student { Name = "Alexander",
+                    EnrollmentDate = DateTime.Parse("2010-09-01") },
+                new Student { Name = "Alonso",
+                    EnrollmentDate = DateTime.Parse("2012-09-01") },
+                new Student {Name = "Anand",
+                    EnrollmentDate = DateTime.Parse("2013-09-01") },
+                new Student {  Name = "Barzdukas",
+                    EnrollmentDate = DateTime.Parse("2012-09-01") },
+                new Student {Name = "Li",
+                    EnrollmentDate = DateTime.Parse("2012-09-01") },
+                new Student {Name = "Justice",
+                    EnrollmentDate = DateTime.Parse("2011-09-01") },
+                new Student {  Name = "Norman",
+                    EnrollmentDate = DateTime.Parse("2013-09-01") },
+                new Student { Name = "Olivetto",
+                    EnrollmentDate = DateTime.Parse("2005-09-01") }
             };
 
             students.ForEach(s => context.Students.AddOrUpdate(p => p.Name, s));
@@ -34,29 +42,34 @@ namespace ContosoUniversity.Migrations
 
             var instructors = new List<Instructor>
             {
-                new Instructor {Name = "Abercrombie",HireDate = DateTime.Parse("1995-03-11") },
-                new Instructor {Name = "Fakhouri",HireDate = DateTime.Parse("2002-07-06") },
-                new Instructor { Name = "Harui",HireDate = DateTime.Parse("1998-07-01") },
-                new Instructor {Name = "Kapoor",HireDate = DateTime.Parse("2001-01-15") },
-                new Instructor {Name = "Zheng",HireDate = DateTime.Parse("2004-02-12") }
+                new Instructor { FirstMidName = "Kim",     LastName = "Abercrombie",
+                    HireDate = DateTime.Parse("1995-03-11") },
+                new Instructor { FirstMidName = "Fadi",    LastName = "Fakhouri",
+                    HireDate = DateTime.Parse("2002-07-06") },
+                new Instructor { FirstMidName = "Roger",   LastName = "Harui",
+                    HireDate = DateTime.Parse("1998-07-01") },
+                new Instructor { FirstMidName = "Candace", LastName = "Kapoor",
+                    HireDate = DateTime.Parse("2001-01-15") },
+                new Instructor { FirstMidName = "Roger",   LastName = "Zheng",
+                    HireDate = DateTime.Parse("2004-02-12") }
             };
-            instructors.ForEach(s => context.Instructors.AddOrUpdate(p => p.Name, s));
+            instructors.ForEach(s => context.Instructors.AddOrUpdate(p => p.LastName, s));
             context.SaveChanges();
 
             var departments = new List<Department>
             {
                 new Department { Name = "English",     Budget = 350000,
                     StartDate = DateTime.Parse("2007-09-01"),
-                    InstructorID  = instructors.Single( i => i.Name == "Abercrombie").ID },
+                    InstructorID  = instructors.Single( i => i.LastName == "Abercrombie").ID },
                 new Department { Name = "Mathematics", Budget = 100000,
                     StartDate = DateTime.Parse("2007-09-01"),
-                    InstructorID  = instructors.Single( i => i.Name == "Fakhouri").ID },
+                    InstructorID  = instructors.Single( i => i.LastName == "Fakhouri").ID },
                 new Department { Name = "Engineering", Budget = 350000,
                     StartDate = DateTime.Parse("2007-09-01"),
-                    InstructorID  = instructors.Single( i => i.Name == "Harui").ID },
+                    InstructorID  = instructors.Single( i => i.LastName == "Harui").ID },
                 new Department { Name = "Economics",   Budget = 100000,
                     StartDate = DateTime.Parse("2007-09-01"),
-                    InstructorID  = instructors.Single( i => i.Name == "Kapoor").ID }
+                    InstructorID  = instructors.Single( i => i.LastName == "Kapoor").ID }
             };
             departments.ForEach(s => context.Departments.AddOrUpdate(p => p.Name, s));
             context.SaveChanges();
@@ -98,13 +111,13 @@ namespace ContosoUniversity.Migrations
             var officeAssignments = new List<OfficeAssignment>
             {
                 new OfficeAssignment {
-                    InstructorID = instructors.Single( i => i.Name == "Fakhouri").ID,
+                    InstructorID = instructors.Single( i => i.LastName == "Fakhouri").ID,
                     Location = "Smith 17" },
                 new OfficeAssignment {
-                    InstructorID = instructors.Single( i => i.Name == "Harui").ID,
+                    InstructorID = instructors.Single( i => i.LastName == "Harui").ID,
                     Location = "Gowan 27" },
                 new OfficeAssignment {
-                    InstructorID = instructors.Single( i => i.Name == "Kapoor").ID,
+                    InstructorID = instructors.Single( i => i.LastName == "Kapoor").ID,
                     Location = "Thompson 304" },
             };
             officeAssignments.ForEach(s => context.OfficeAssignments.AddOrUpdate(p => p.InstructorID, s));
@@ -197,9 +210,9 @@ namespace ContosoUniversity.Migrations
         void AddOrUpdateInstructor(SchoolContext context, string courseTitle, string instructorName)
         {
             var crs = context.Courses.SingleOrDefault(c => c.Title == courseTitle);
-            var inst = crs.Instructors.SingleOrDefault(i => i.Name == instructorName);
+            var inst = crs.Instructors.SingleOrDefault(i => i.LastName == instructorName);
             if (inst == null)
-                crs.Instructors.Add(context.Instructors.Single(i => i.Name == instructorName));
+                crs.Instructors.Add(context.Instructors.Single(i => i.LastName == instructorName));
         }
     }
 }

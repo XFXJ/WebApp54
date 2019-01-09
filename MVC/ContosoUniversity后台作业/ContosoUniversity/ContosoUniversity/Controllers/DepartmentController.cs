@@ -31,8 +31,14 @@ namespace ContosoUniversity.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            // Commenting out original code to show how to use a raw SQL query.
+            //Department department = await db.Departments.FindAsync(id);
+
+            // Create and execute raw SQL query.
             string query = "SELECT * FROM Department WHERE DepartmentID = @p0";
             Department department = await db.Departments.SqlQuery(query, id).SingleOrDefaultAsync();
+
             if (department == null)
             {
                 return HttpNotFound();
@@ -43,7 +49,7 @@ namespace ContosoUniversity.Controllers
         // GET: Department/Create
         public ActionResult Create()
         {
-            ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "FullName");
+            ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "LastName");
             return View();
         }
 
@@ -61,7 +67,7 @@ namespace ContosoUniversity.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "FullName");
+            ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "LastName", department.InstructorID);
             return View(department);
         }
 
@@ -77,7 +83,7 @@ namespace ContosoUniversity.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "FullName");
+            ViewBag.InstructorID = new SelectList(db.Instructors, "ID", "LastName", department.InstructorID);
             return View(department);
         }
 

@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ContosoUniversity.DAL;
 using ContosoUniversity.Models;
-using ContosoUniversity.Viewmodel;
+using ContosoUniversity.ViewModels;
 using System.Data.Entity.Infrastructure;
 
 namespace ContosoUniversity.Controllers
@@ -24,7 +24,7 @@ namespace ContosoUniversity.Controllers
             viewModel.Instructors = db.Instructors
                 .Include(i => i.OfficeAssignment)
                 .Include(i => i.Courses.Select(c => c.Department))
-                .OrderBy(i => i.Name);
+                .OrderBy(i => i.LastName);
 
             if (id != null)
             {
@@ -36,8 +36,6 @@ namespace ContosoUniversity.Controllers
             if (courseID != null)
             {
                 ViewBag.CourseID = courseID.Value;
-                //viewModel.Enrollments = viewModel.Courses.Where(
-                //    x => x.CourseID == courseID).Single().Enrollments;
                 var selectedCourse = viewModel.Courses.Where(x => x.CourseID == courseID).Single();
                 db.Entry(selectedCourse).Collection(x => x.Enrollments).Load();
                 foreach (Enrollment enrollment in selectedCourse.Enrollments)
@@ -50,7 +48,6 @@ namespace ContosoUniversity.Controllers
 
             return View(viewModel);
         }
-
         // GET: Instructor/Details/5
         public ActionResult Details(int? id)
         {
@@ -141,7 +138,7 @@ namespace ContosoUniversity.Controllers
         // POST: Instructor/Edit/5
         // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int? id, string[] selectedCourses)
         {
@@ -180,6 +177,7 @@ namespace ContosoUniversity.Controllers
             PopulateAssignedCourseData(instructorToUpdate);
             return View(instructorToUpdate);
         }
+
         private void UpdateInstructorCourses(string[] selectedCourses, Instructor instructorToUpdate)
         {
             if (selectedCourses == null)
@@ -209,7 +207,6 @@ namespace ContosoUniversity.Controllers
                 }
             }
         }
-
 
         // GET: Instructor/Delete/5
         public ActionResult Delete(int? id)

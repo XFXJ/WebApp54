@@ -31,6 +31,21 @@ namespace ContosoUniversity.Controllers
             return View(courses.ToList());
         }
 
+        public ActionResult UpdateCourseCredits()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UpdateCourseCredits(int? multiplier)
+        {
+            if (multiplier != null)
+            {
+                ViewBag.RowsAffected = db.Database.ExecuteSqlCommand("UPDATE Course SET Credits = Credits * {0}", multiplier);
+            }
+            return View();
+        }
+
         // GET: Course/Details/5
         public ActionResult Details(int? id)
         {
@@ -53,13 +68,12 @@ namespace ContosoUniversity.Controllers
             return View();
         }
 
-
         // POST: Course/Create
         // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CourseID,Title,Credits,DepartmentID")] Course course)
+        public ActionResult Create([Bind(Include = "CourseID,Title,Credits,DepartmentID")]Course course)
         {
             try
             {
@@ -79,20 +93,6 @@ namespace ContosoUniversity.Controllers
             return View(course);
         }
 
-        public ActionResult UpdateCourseCredits()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult UpdateCourseCredits(int? multiplier)
-        {
-            if (multiplier != null)
-            {
-                ViewBag.RowsAffected = db.Database.ExecuteSqlCommand("UPDATE Course SET Credits = Credits * {0}", multiplier);
-            }
-            return View();
-        }
         // GET: Course/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -147,6 +147,7 @@ namespace ContosoUniversity.Controllers
                                    select d;
             ViewBag.DepartmentID = new SelectList(departmentsQuery, "DepartmentID", "Name", selectedDepartment);
         }
+
         // GET: Course/Delete/5
         public ActionResult Delete(int? id)
         {

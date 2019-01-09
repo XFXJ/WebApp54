@@ -39,7 +39,6 @@ namespace ContosoUniversity.Migrations
                         ID = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         EnrollmentDate = c.DateTime(nullable: false),
-                        Image = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
             

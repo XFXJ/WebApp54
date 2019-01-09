@@ -7,10 +7,12 @@ namespace ContosoUniversity.Migrations
     {
         public override void Up()
         {
+            AlterColumn("dbo.Student", "Name", c => c.String(maxLength: 50));
         }
         
         public override void Down()
         {
+            AlterColumn("dbo.Student", "Name", c => c.String());
         }
     }
 }

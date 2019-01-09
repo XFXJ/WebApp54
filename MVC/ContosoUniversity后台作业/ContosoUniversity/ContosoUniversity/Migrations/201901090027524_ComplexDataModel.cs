@@ -26,7 +26,8 @@ namespace ContosoUniversity.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(maxLength: 50),
+                        LastName = c.String(maxLength: 50),
+                        FirstName = c.String(maxLength: 50),
                         HireDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.ID);
@@ -43,17 +44,17 @@ namespace ContosoUniversity.Migrations
                 .Index(t => t.InstructorID);
 
             CreateTable(
-          "dbo.CourseInstructor",
-        c => new
-        {
-            CourseID = c.Int(nullable: false),
-            InstructorID = c.Int(nullable: false),
-        })
-        .PrimaryKey(t => new { t.CourseID, t.InstructorID })
-        .ForeignKey("dbo.Course", t => t.CourseID, cascadeDelete: true)
-        .ForeignKey("dbo.Instructor", t => t.InstructorID, cascadeDelete: true)
-        .Index(t => t.CourseID)
-        .Index(t => t.InstructorID);
+         "dbo.CourseInstructor",
+         c => new
+         {
+             CourseID = c.Int(nullable: false),
+             InstructorID = c.Int(nullable: false),
+         })
+         .PrimaryKey(t => new { t.CourseID, t.InstructorID })
+         .ForeignKey("dbo.Course", t => t.CourseID, cascadeDelete: true)
+         .ForeignKey("dbo.Instructor", t => t.InstructorID, cascadeDelete: true)
+         .Index(t => t.CourseID)
+         .Index(t => t.InstructorID);
 
             // Create  a department for course to point to.
             Sql("INSERT INTO dbo.Department (Name, Budget, StartDate) VALUES ('Temp', 0.00, GETDATE())");
@@ -62,6 +63,7 @@ namespace ContosoUniversity.Migrations
             //AddColumn("dbo.Course", "DepartmentID", c => c.Int(nullable: false));
 
             AlterColumn("dbo.Course", "Title", c => c.String(maxLength: 50));
+
         }
         
         public override void Down()
@@ -76,7 +78,7 @@ namespace ContosoUniversity.Migrations
             DropIndex("dbo.OfficeAssignment", new[] { "InstructorID" });
             DropIndex("dbo.Department", new[] { "InstructorID" });
             DropIndex("dbo.Course", new[] { "DepartmentID" });
-            AlterColumn("dbo.Student", "Name", c => c.String());
+            AlterColumn("dbo.Course", "Title", c => c.String());
             DropColumn("dbo.Course", "DepartmentID");
             DropTable("dbo.CourseInstructor");
             DropTable("dbo.OfficeAssignment");

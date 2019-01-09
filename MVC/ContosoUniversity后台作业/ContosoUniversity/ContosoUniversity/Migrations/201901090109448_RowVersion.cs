@@ -7,13 +7,7 @@ namespace ContosoUniversity.Migrations
     {
         public override void Up()
         {
-            RenameTable(name: "dbo.Instructor", newName: "Person");
             AddColumn("dbo.Department", "RowVersion", c => c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"));
-            AddColumn("dbo.Person", "EnrollmentDate", c => c.DateTime());
-            AddColumn("dbo.Person", "Discriminator", c => c.String(nullable: false, maxLength: 128));
-            AlterColumn("dbo.Person", "Name", c => c.String(nullable: false, maxLength: 50));
-            AlterColumn("dbo.Person", "HireDate", c => c.DateTime());
-            DropTable("dbo.Student");
             AlterStoredProcedure(
                 "dbo.Department_Insert",
                 p => new
@@ -74,23 +68,7 @@ namespace ContosoUniversity.Migrations
         
         public override void Down()
         {
-            CreateTable(
-                "dbo.Student",
-                c => new
-                    {
-                        ID = c.Int(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 50),
-                        EnrollmentDate = c.DateTime(nullable: false),
-                        Image = c.String(),
-                    })
-                .PrimaryKey(t => t.ID);
-            
-            AlterColumn("dbo.Person", "HireDate", c => c.DateTime(nullable: false));
-            AlterColumn("dbo.Person", "Name", c => c.String(maxLength: 50));
-            DropColumn("dbo.Person", "Discriminator");
-            DropColumn("dbo.Person", "EnrollmentDate");
             DropColumn("dbo.Department", "RowVersion");
-            RenameTable(name: "dbo.Person", newName: "Instructor");
             throw new NotSupportedException("Scaffolding create or alter procedure operations is not supported in down methods.");
         }
     }
